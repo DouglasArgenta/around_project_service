@@ -46,116 +46,25 @@
         </section>
 
         <section class="places">
-          <ul class="places__list">
-            <li class="place-card">
-              <img
-                src="./images/yosemite-valley.jpg"
-                alt="Vale de Yosemite"
-                class="place-card__image"
-              />
-              <div class="place-card__footer">
-                <h2 class="place-card__title">Vale de Yosemite</h2>
-                <button class="button button_type_like">
-                  <img
-                    src="./images/like-button.png"
-                    alt="Curtir"
-                    class="button__icon"
-                  />
-                </button>
-              </div>
-            </li>
-
-            <li class="place-card">
-              <img
-                src="./images/lake-louise.jpg"
-                alt="Lago Louise"
-                class="place-card__image"
-              />
-              <div class="place-card__footer">
-                <h2 class="place-card__title">Lago Louise</h2>
-                <button class="button button_type_like">
-                  <img
-                    src="./images/like-button.png"
-                    alt="Curtir"
-                    class="button__icon"
-                  />
-                </button>
-              </div>
-            </li>
-
-            <li class="place-card">
-              <img
-                src="./images/carette-mountains.jpg"
-                alt="Montanhas Carette"
-                class="place-card__image"
-              />
-              <div class="place-card__footer">
-                <h2 class="place-card__title">Montanhas Carette</h2>
-                <button class="button button_type_like">
-                  <img
-                    src="./images/like-button.png"
-                    alt="Curtir"
-                    class="button__icon"
-                  />
-                </button>
-              </div>
-            </li>
-
-            <li class="place-card">
-              <img
-                src="./images/latemar.jpg"
-                alt="Latemar"
-                class="place-card__image"
-              />
-              <div class="place-card__footer">
-                <h2 class="place-card__title">Latemar</h2>
-                <button class="button button_type_like">
-                  <img
-                    src="./images/like-button.png"
-                    alt="Curtir"
-                    class="button__icon"
-                  />
-                </button>
-              </div>
-            </li>
-
-            <li class="place-card">
-              <img
-                src="./images/vanoise-national-park.jpg"
-                alt="Parque Nacional Vanoise"
-                class="place-card__image"
-              />
-              <div class="place-card__footer">
-                <h2 class="place-card__title">Parque Nacional Vanoise</h2>
-                <button class="button button_type_like">
-                  <img
-                    src="./images/like-button.png"
-                    alt="Curtir"
-                    class="button__icon"
-                  />
-                </button>
-              </div>
-            </li>
-
-            <li class="place-card">
-              <img
-                src="./images/lake-braies.jpg"
-                alt="Lago di Braies"
-                class="place-card__image"
-              />
-              <div class="place-card__footer">
-                <h2 class="place-card__title">Lago di Braies</h2>
-                <button class="button button_type_like">
-                  <img
-                    src="./images/like-button.png"
-                    alt="Curtir"
-                    class="button__icon"
-                  />
-                </button>
-              </div>
-            </li>
-          </ul>
+          <ul class="places__list"></ul>
         </section>
+
+        <template id="card-template">
+          <li class="place-card">
+            <button
+              class="button button_type_delete"
+              aria-label="Apagar"
+            ></button>
+            <img src="#" alt="" class="place-card__image" />
+            <div class="place-card__footer">
+              <h2 class="place-card__title"></h2>
+              <button
+                class="button button_type_like"
+                aria-label="Curtir"
+              ></button>
+            </div>
+          </li>
+        </template>
       </main>
 
       <footer class="footer">
@@ -231,6 +140,16 @@
               Criar
             </button>
           </form>
+        </div>
+      </div>
+
+      <div class="popup popup_type_image">
+        <div class="popup__container">
+          <div class="popup__image-container">
+            <button class="button button_type_close"></button>
+            <img src="#" alt="" class="popup__image" />
+          </div>
+          <p class="popup__title popup__title_image"></p>
         </div>
       </div>
     </div>

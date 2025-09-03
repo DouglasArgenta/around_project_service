@@ -1,6 +1,6 @@
 # Around The U.S.
 
-**▶️ Visualizar Projeto Online** [https://douglasargenta.github.io/around-the-us/]
+**▶️ Visualizar Projeto Online** [https://douglasargenta.github.io/web_project_around/]
 
 Este projeto é uma plataforma web para compartilhar fotos de lugares ao redor do mundo, com foco em um perfil de usuário interativo e uma galeria de imagens dinâmica. O design é totalmente responsivo, garantindo uma experiência de usuário fluida em diferentes dispositivos.
 

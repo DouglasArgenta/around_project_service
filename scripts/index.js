@@ -1,3 +1,9 @@
+import {
+  enableValidation,
+  resetValidation,
+  validationConfig,
+} from "./validate.js";
+
 const profileEditButton = document.querySelector(".button_type_edit");
 const profileEditPopup = document.querySelector(".popup_type_edit-profile");
 const profileEditCloseButton =
@@ -52,12 +58,33 @@ const initialCards = [
   },
 ];
 
+function handleEscClose(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    if (openedPopup) {
+      closePopup(openedPopup);
+    }
+  }
+}
+
+function closePopupOnOverlayClick(evt) {
+  if (evt.target.classList.contains("popup_opened")) {
+    closePopup(evt.target);
+  }
+}
+
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  document.addEventListener("keydown", handleEscClose);
+  const form = popup.querySelector(".popup__form");
+  if (form) {
+    resetValidation(form, validationConfig);
+  }
 }
 
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  document.removeEventListener("keydown", handleEscClose);
 }
 
 function createCard(cardData) {
@@ -121,13 +148,19 @@ profileEditButton.addEventListener("click", () => {
   descriptionInput.value = profileDescription.textContent;
   openPopup(profileEditPopup);
 });
+
 profileEditCloseButton.addEventListener("click", () =>
   closePopup(profileEditPopup)
 );
 profileEditForm.addEventListener("submit", handleProfileFormSubmit);
+profileEditPopup.addEventListener("click", closePopupOnOverlayClick);
 
 profileAddButton.addEventListener("click", () => openPopup(cardAddPopup));
 cardAddCloseButton.addEventListener("click", () => closePopup(cardAddPopup));
 cardAddForm.addEventListener("submit", handleCardAddFormSubmit);
+cardAddPopup.addEventListener("click", closePopupOnOverlayClick);
 
 imagePopupCloseButton.addEventListener("click", () => closePopup(imagePopup));
+imagePopup.addEventListener("click", closePopupOnOverlayClick);
+
+enableValidation(validationConfig);

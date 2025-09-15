@@ -1,35 +1,6 @@
-import {
-  enableValidation,
-  resetValidation,
-  validationConfig,
-} from "./validate.js";
-
-const profileEditButton = document.querySelector(".button_type_edit");
-const profileEditPopup = document.querySelector(".popup_type_edit-profile");
-const profileEditCloseButton =
-  profileEditPopup.querySelector(".button_type_close");
-const profileName = document.querySelector(".profile__name");
-const profileDescription = document.querySelector(".profile__description");
-const profileEditForm = profileEditPopup.querySelector(".popup__form");
-const nameInput = profileEditPopup.querySelector(".popup__input_type_name");
-const descriptionInput = profileEditPopup.querySelector(
-  ".popup__input_type_description"
-);
-
-const profileAddButton = document.querySelector(".profile__add-button");
-const cardAddPopup = document.querySelector(".popup_type_add-card");
-const cardAddCloseButton = cardAddPopup.querySelector(".button_type_close");
-const cardAddForm = cardAddPopup.querySelector(".popup__form");
-const titleInput = cardAddPopup.querySelector(".popup__input_type_title");
-const linkInput = cardAddPopup.querySelector(".popup__input_type_link");
-
-const imagePopup = document.querySelector(".popup_type_image");
-const imagePopupImage = imagePopup.querySelector(".popup__image");
-const imagePopupTitle = imagePopup.querySelector(".popup__title_image");
-const imagePopupCloseButton = imagePopup.querySelector(".button_type_close");
-
-const cardContainer = document.querySelector(".places__list");
-const cardTemplate = document.querySelector("#card-template").content;
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+import { openPopup, closePopup } from "./utils.js";
 
 const initialCards = [
   {
@@ -58,61 +29,45 @@ const initialCards = [
   },
 ];
 
-function handleEscClose(evt) {
-  if (evt.key === "Escape") {
-    const openedPopup = document.querySelector(".popup_opened");
-    if (openedPopup) {
-      closePopup(openedPopup);
-    }
-  }
-}
+const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button_type_save",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+};
 
-function closePopupOnOverlayClick(evt) {
-  if (evt.target.classList.contains("popup_opened")) {
-    closePopup(evt.target);
-  }
-}
+const profileEditButton = document.querySelector(".button_type_edit");
+const profileEditPopup = document.querySelector(".popup_type_edit-profile");
+const profileEditCloseButton =
+  profileEditPopup.querySelector(".button_type_close");
+const profileName = document.querySelector(".profile__name");
+const profileDescription = document.querySelector(".profile__description");
+const profileEditForm = profileEditPopup.querySelector(".popup__form");
+const nameInput = profileEditPopup.querySelector(".popup__input_type_name");
+const descriptionInput = profileEditPopup.querySelector(
+  ".popup__input_type_description"
+);
 
-function openPopup(popup) {
-  popup.classList.add("popup_opened");
-  document.addEventListener("keydown", handleEscClose);
-  const form = popup.querySelector(".popup__form");
-  if (form) {
-    resetValidation(form, validationConfig);
-  }
-}
+const profileAddButton = document.querySelector(".profile__add-button");
+const cardAddPopup = document.querySelector(".popup_type_add-card");
+const cardAddCloseButton = cardAddPopup.querySelector(".button_type_close");
+const cardAddForm = cardAddPopup.querySelector(".popup__form");
+const titleInput = cardAddPopup.querySelector(".popup__input_type_title");
+const linkInput = cardAddPopup.querySelector(".popup__input_type_link");
 
-function closePopup(popup) {
-  popup.classList.remove("popup_opened");
-  document.removeEventListener("keydown", handleEscClose);
-}
+const imagePopup = document.querySelector(".popup_type_image");
+const imagePopupImage = imagePopup.querySelector(".popup__image");
+const imagePopupTitle = imagePopup.querySelector(".popup__title_image");
+const imagePopupCloseButton = imagePopup.querySelector(".button_type_close");
+
+const cardContainer = document.querySelector(".places__list");
+const cardTemplate = document.querySelector("#card-template").content;
 
 function createCard(cardData) {
-  const cardElement = cardTemplate.querySelector(".place-card").cloneNode(true);
-  const cardImage = cardElement.querySelector(".place-card__image");
-  const cardTitle = cardElement.querySelector(".place-card__title");
-  const likeButton = cardElement.querySelector(".button_type_like");
-  const deleteButton = cardElement.querySelector(".button_type_delete");
-
-  cardImage.src = cardData.link;
-  cardImage.alt = cardData.name;
-  cardTitle.textContent = cardData.name;
-
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("button_type_like-active");
-  });
-
-  deleteButton.addEventListener("click", () => {
-    cardElement.remove();
-  });
-
-  cardImage.addEventListener("click", () => {
-    imagePopupImage.src = cardData.link;
-    imagePopupImage.alt = cardData.name;
-    imagePopupTitle.textContent = cardData.name;
-    openPopup(imagePopup);
-  });
-
+  const card = new Card(cardData, "#card-template");
+  const cardElement = card.generateCard();
   return cardElement;
 }
 
@@ -136,6 +91,12 @@ function handleCardAddFormSubmit(event) {
 
   cardAddForm.reset();
   closePopup(cardAddPopup);
+}
+
+function closePopupOnOverlayClick(evt) {
+  if (evt.target.classList.contains("popup_opened")) {
+    closePopup(evt.target);
+  }
 }
 
 initialCards.forEach((cardData) => {
@@ -163,4 +124,11 @@ cardAddPopup.addEventListener("click", closePopupOnOverlayClick);
 imagePopupCloseButton.addEventListener("click", () => closePopup(imagePopup));
 imagePopup.addEventListener("click", closePopupOnOverlayClick);
 
-enableValidation(validationConfig);
+const profileFormValidator = new FormValidator(
+  validationConfig,
+  profileEditForm
+);
+const newCardFormValidator = new FormValidator(validationConfig, cardAddForm);
+
+profileFormValidator.enableValidation();
+newCardFormValidator.enableValidation();

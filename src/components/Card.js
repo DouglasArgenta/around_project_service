@@ -1,9 +1,9 @@
-import { openPopup } from "./utils.js";
 export default class Card {
-  constructor(cardData, cardSelector) {
+  constructor(cardData, cardSelector, handleCardClick) {
     this._name = cardData.name;
     this._link = cardData.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -14,8 +14,8 @@ export default class Card {
     return cardElement;
   }
 
-  _handleLikeClick(evt) {
-    evt.target.classList.toggle("button_type_like-active");
+  _handleLikeClick() {
+    this._likeButton.classList.toggle("button_type_like-active");
   }
 
   _handleDeleteClick() {
@@ -23,25 +23,14 @@ export default class Card {
     this._element = null;
   }
 
-  _handleImageClick() {
-    const imagePopup = document.querySelector(".popup_type_image");
-    const imagePopupImage = imagePopup.querySelector(".popup__image");
-    const imagePopupTitle = imagePopup.querySelector(".popup__title_image");
-
-    imagePopupImage.src = this._link;
-    imagePopupImage.alt = this._name;
-    imagePopupTitle.textContent = this._name;
-    openPopup(imagePopup);
-  }
-
   _setEventListeners() {
-    this._likeButton.addEventListener("click", (evt) =>
-      this._handleLikeClick(evt)
-    );
+    this._likeButton.addEventListener("click", () => this._handleLikeClick());
     this._deleteButton.addEventListener("click", () =>
       this._handleDeleteClick()
     );
-    this._cardImage.addEventListener("click", () => this._handleImageClick());
+    this._cardImage.addEventListener("click", () =>
+      this._handleCardClick(this._name, this._link)
+    );
   }
 
   generateCard() {

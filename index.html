@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EUA Afora</title>
-    <link rel="stylesheet" href="./pages/index.css" />
+    <link rel="stylesheet" href="./src/pages/index.css" />
   </head>
   <body class="page">
     <div class="page__content">
       <header class="header">
         <img
-          src="../images/logo.png"
+          src="/images/logo.png"
           alt="Around The U.S. logo"
           class="header__logo"
         />
@@ -19,7 +19,7 @@
       <main class="main">
         <section class="profile">
           <img
-            src="../images/profile-image.jpg"
+            src="/images/profile-image.jpg"
             alt="Foto de Jacques Cousteau"
             class="profile__image"
           />
@@ -28,7 +28,7 @@
               <h1 class="profile__name">Jacques Cousteau</h1>
               <button class="button button_type_edit">
                 <img
-                  src="../images/edit-button.png"
+                  src="/images/edit-button.png"
                   alt="Editar perfil"
                   class="button__icon"
                 />
@@ -51,13 +51,10 @@
 
         <template id="card-template">
           <li class="place-card">
-            <button class="button button_type_delete" aria-label="Apagar">
-              <img
-                src="../images/Trash.svg"
-                alt="Ícone de lixeira"
-                class="button__icon"
-              />
-            </button>
+            <button
+              class="button button_type_delete"
+              aria-label="Apagar"
+            ></button>
             <img src="#" alt="" class="place-card__image" />
             <div class="place-card__footer">
               <h2 class="place-card__title"></h2>
@@ -76,13 +73,7 @@
 
       <div class="popup popup_type_edit-profile">
         <div class="popup__container">
-          <button class="button button_type_close">
-            <img
-              src="../images/close-button.png"
-              alt="Fechar"
-              class="button__icon"
-            />
-          </button>
+          <button class="button button_type_close"></button>
           <h3 class="popup__title">Editar perfil</h3>
           <form class="popup__form" name="edit-profile">
             <input
@@ -119,13 +110,7 @@
 
       <div class="popup popup_type_add-card">
         <div class="popup__container">
-          <button class="button button_type_close">
-            <img
-              src="../images/close-button.png"
-              alt="Fechar"
-              class="button__icon"
-            />
-          </button>
+          <button class="button button_type_close"></button>
           <h3 class="popup__title">Novo local</h3>
           <form class="popup__form" name="add-card">
             <input
@@ -168,6 +153,6 @@
         </div>
       </div>
     </div>
-    <script type="module" src="./pages/index.js"></script>
+    <script type="module" src="src/pages/index.js"></script>
   </body>
 </html>

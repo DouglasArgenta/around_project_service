@@ -1,6 +1,6 @@
 # Around The U.S.
 
-**▶️ Visualizar Projeto Online** [https://douglasargenta.github.io/web_project_around/]
+**▶️ Visualizar Projeto Online** [https://douglasargenta.github.io/around_project_service/]
 
 Este projeto é uma plataforma web para compartilhar fotos de lugares ao redor do mundo, com foco em um perfil de usuário interativo e uma galeria de imagens dinâmica. O design é totalmente responsivo, garantindo uma experiência de usuário fluida em diferentes dispositivos.
 
@@ -50,21 +50,25 @@ O desenvolvimento focou na criação de um layout adaptável que se ajusta perfe
 O projeto segue a metodologia BEM Flat para a organização dos arquivos e pastas:
 
 /
-├── .gitignore
 ├── .editorconfig
+├── .gitignore
 ├── .prettierignore
 ├── README.md
+├── index.html
 ├── images/
-│ └── (todas as imagens do projeto)
+│ ├── add-button.png
+│ ├── logo.png
+│ ├── profile-image.jpg
+│ └── (outras imagens e ícones)
 └── src/
-├── index.html ├── blocks/
+├── blocks/
+│ ├── elements.css
+│ ├── footer.css
 │ ├── header.css
 │ ├── page.css
-│ ├── profile.css
-│ ├── elements.css
-│ ├── popup.css
 │ ├── places.css
-│ └── footer.css
+│ ├── popup.css
+│ └── profile.css
 ├── components/
 │ ├── Card.js
 │ ├── FormValidator.js
